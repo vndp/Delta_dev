@@ -53,12 +53,12 @@
     .botao-branco { background: var(--branco); color: var(--preto); }
 
 
-    .cabecalho { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--linha); }
+    .cabecalho { position: sticky; top: 0; z-index: 10; background: rgba(14, 17, 22, .96); backdrop-filter: blur(8px); border-bottom: 1px solid var(--grafite); }
     .cabecalho .container { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 76px; }
-    .cabecalho img { height: 44px; width: auto; }
+    .cabecalho .logo-topo { height: 40px; width: auto; }
     .menu { display: flex; align-items: center; gap: 28px; font-weight: 600; font-size: 15px; }
-    .menu a { text-decoration: none; }
-    .menu a:not(.botao):hover { color: var(--azul); }
+    .menu a { text-decoration: none; color: var(--branco); }
+    .menu a:not(.botao):hover { color: var(--azul-claro); }
     .menu .botao { padding: 11px 18px; font-size: 15px; }
 
 
@@ -198,7 +198,7 @@
 
   <header class="cabecalho">
     <div class="container">
-      <a href="#inicio" aria-label="Delta Dev, voltar ao início"><img src="assets/logo.png" alt="Delta Dev"></a>
+           <a href="#inicio" aria-label="Delta Dev, voltar ao início"><img class="logo-topo" src="assets/logo-horizontal.png" alt="Delta Dev"></a>
       <nav class="menu" aria-label="Menu principal">
         <a href="#solucoes">Soluções digitais</a>
         <a href="#educacao">Educação</a>

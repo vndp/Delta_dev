@@ -169,6 +169,41 @@
         padding: 11px 18px;
         font-size: 15px;
       }
+      .menu-toggle {
+        display: none;
+        width: 44px;
+        height: 44px;
+        background: none;
+        border: 0;
+        border-radius: 6px;
+        cursor: pointer;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+      }
+      .menu-toggle span {
+        width: 24px;
+        height: 2px;
+        background: var(--branco);
+        border-radius: 2px;
+        transition:
+          transform 0.2s,
+          opacity 0.2s;
+      }
+      .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+      }
+      .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+        opacity: 0;
+      }
+      .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
+      }
+      .menu-toggle:focus-visible {
+        outline: 3px solid var(--azul-claro);
+        outline-offset: 2px;
+      }
 
       .hero {
         padding-block: 72px;
@@ -214,7 +249,7 @@
         flex-wrap: wrap;
       }
       .hero-logo {
-        max-width: 440px;
+        max-width: 320px;
         margin-inline: auto;
       }
 
@@ -518,23 +553,12 @@
           ),
           var(--grafite);
         color: var(--branco);
-        padding-bottom: 0;
-      }
-      .equipe .container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 48px;
-        align-items: end;
-      }
-      .equipe-foto {
-        align-self: end;
       }
       .equipe-texto {
         display: flex;
         flex-direction: column;
         gap: 22px;
-        padding-bottom: 88px;
-        align-self: center;
+        max-width: 720px;
       }
       .equipe .eyebrow {
         color: var(--azul-claro);
@@ -728,6 +752,40 @@
         letter-spacing: 0.08em;
       }
 
+      /* ====== TABLET E CELULAR ====== */
+      @media (max-width: 900px) {
+        .menu-toggle {
+          display: flex;
+        }
+        .menu {
+          display: none;
+          position: absolute;
+          top: 76px;
+          left: 0;
+          right: 0;
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0;
+          padding: 8px 24px 24px;
+          background: var(--preto);
+          border-bottom: 1px solid var(--grafite);
+          box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+        }
+        .menu.aberto {
+          display: flex;
+        }
+        .menu a:not(.botao) {
+          padding: 16px 0;
+          font-size: 17px;
+          border-bottom: 1px solid var(--grafite);
+        }
+        .menu .botao {
+          margin-top: 18px;
+          padding: 15px;
+          font-size: 16px;
+          text-align: center;
+        }
+      }
       @media (max-width: 960px) {
         .cards-formacoes {
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -736,27 +794,60 @@
           grid-template-columns: 1fr;
           gap: 20px;
         }
-        .hero .container,
-        .equipe .container {
+        .hero .container {
           grid-template-columns: 1fr;
         }
         .hero-logo {
-          max-width: 300px;
+          max-width: 170px;
+          margin-inline: 0;
           order: -1;
-        }
-        .equipe-texto {
-          padding-bottom: 0;
-        }
-        .equipe-foto {
-          order: 2;
         }
       }
       @media (max-width: 720px) {
-        .menu a:not(.botao) {
-          display: none;
-        }
         section {
           padding-block: 64px;
+        }
+        .hero {
+          padding-block: 40px 56px;
+        }
+        .hero .container {
+          gap: 28px;
+        }
+        .hero p {
+          font-size: 18px;
+        }
+        .botoes .botao,
+        .chamada .botao,
+        .formacao-chamada .botao,
+        .contato-linha .botao {
+          width: 100%;
+          text-align: center;
+        }
+        .cabeca-secao p {
+          font-size: 17px;
+        }
+        .chamada {
+          padding: 24px;
+        }
+        .chamada p {
+          font-size: 17px;
+        }
+        .formacao {
+          padding: 24px;
+        }
+        .nome-membro {
+          flex: 1;
+          white-space: nowrap;
+          padding: 10px 12px;
+          font-size: 17px;
+        }
+        .contato p {
+          font-size: 18px;
+        }
+        .rodape .container {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
         }
         .cards-solucoes,
         .cards-formacoes,
@@ -764,7 +855,12 @@
           grid-template-columns: 1fr;
         }
         .card-solucao {
-          padding: 28px;
+          padding: 26px;
+          gap: 18px;
+        }
+        .card-solucao .chips span {
+          font-size: 14px;
+          padding: 7px 12px;
         }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -784,7 +880,16 @@
             src="assets/logo-horizontal.png"
             alt="Delta Dev"
         /></a>
-        <nav class="menu" aria-label="Menu principal">
+        <button
+          class="menu-toggle"
+          id="menu-toggle"
+          aria-label="Abrir menu"
+          aria-expanded="false"
+          aria-controls="menu-principal"
+        >
+          <span></span><span></span><span></span>
+        </button>
+        <nav class="menu" id="menu-principal" aria-label="Menu principal">
           <a href="#solucoes">Soluções digitais</a>
           <a href="#educacao">Educação</a>
           <a href="#projetos">Nossos projetos</a>
@@ -1028,11 +1133,6 @@
 
       <section class="equipe" id="equipe">
         <div class="container">
-          <img
-            class="equipe-foto"
-            src="assets/equipe.png"
-            alt="Lucas, Vitória e Kleber Jr., equipe da Delta Dev"
-          />
           <div class="equipe-texto">
             <span class="eyebrow">Quem somos</span>
             <h2 class="titulo-secao">Tecnologia feita por gente daqui.</h2>
@@ -1134,7 +1234,7 @@
           class="botao botao-azul"
           id="popup-botao"
           hidden
-          href="https://wa.me/5594SEUNUMERO?text=Ol%C3%A1%2C%20Delta%20Dev!%20Quero%20um%20or%C3%A7amento%20para%20um%20projeto."
+          href="https://wa.me/5591991374385?text=Ol%C3%A1%2C%20Delta%20Dev!%20Quero%20um%20or%C3%A7amento%20para%20um%20projeto."
           target="_blank"
           rel="noopener"
           >Pedir orçamento</a
@@ -1143,6 +1243,22 @@
     </div>
 
     <script>
+      // ====== MENU DO CELULAR ======
+      const menuToggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("menu-principal");
+      function fecharMenu() {
+        menu.classList.remove("aberto");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Abrir menu");
+      }
+      menuToggle.addEventListener("click", () => {
+        const aberto = menu.classList.toggle("aberto");
+        menuToggle.setAttribute("aria-expanded", String(aberto));
+        menuToggle.setAttribute("aria-label", aberto ? "Fechar menu" : "Abrir menu");
+      });
+      menu.querySelectorAll("a").forEach((link) => link.addEventListener("click", fecharMenu));
+
+      // ====== DADOS DA EQUIPE ======
       const equipe = {
         lucas: {
           nome: "Lucas",
@@ -1271,7 +1387,9 @@
       document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && fundo.classList.contains("aberto"))
           fecharPopup();
+        if (e.key === "Escape" && menu.classList.contains("aberto"))
+          fecharMenu();
       });
     </script>
-  </body> 
+  </body>
 </html>

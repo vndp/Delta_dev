@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delta Dev | Ideias que viram soluções</title>
+  <meta name="description" content="Startup de tecnologia de Tucuruí, Pará. Criamos sites, sistemas e aplicativos, e levamos formações de tecnologia para a educação.">
+  <link rel="icon" href="assets/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Arbutus+Slab&family=Chakra+Petch:wght@600;700&family=Funnel+Display:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    
+    :root {
+      --azul: #0B5CFF;
+      --azul-claro: #6E9BFF;
+      --azul-suave: #E6EEFF;
+      --preto: #0E1116;
+      --grafite: #2A303A;
+      --texto: #3B4250;
+      --texto-claro: #C5CAD3;
+      --fundo-claro: #F5F7FA;
+      --linha: #E4E7EC;
+      --branco: #FFFFFF;
+
+      --fonte-titulo: "Arbutus Slab", Georgia, serif;
+      --fonte-texto: "Funnel Display", system-ui, sans-serif;
+      --fonte-detalhe: "Chakra Petch", system-ui, sans-serif;
+
+      --largura: 1152px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: var(--fonte-texto); color: var(--preto); background: var(--branco); line-height: 1.5; }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; }
+    h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
+    p { margin: 0; }
+
+    .container { width: 100%; max-width: var(--largura); margin: 0 auto; padding-inline: 24px; }
+    section { padding-block: 88px; scroll-margin-top: 80px; }
+
+    .eyebrow { font-family: var(--fonte-detalhe); font-weight: 600; font-size: 14px; letter-spacing: .2em; text-transform: uppercase; color: var(--azul); }
+    .titulo-secao { font-family: var(--fonte-titulo); font-size: clamp(32px, 4.5vw, 44px); line-height: 1.1; }
+
+    .botao { display: inline-block; font-family: var(--fonte-texto); font-weight: 700; font-size: 16px; padding: 15px 24px; border-radius: 6px; text-decoration: none; border: 1.5px solid transparent; cursor: pointer; transition: transform .15s, background .15s; }
+    .botao:hover { transform: translateY(-2px); }
+    .botao:focus-visible, .nome-membro:focus-visible, .popup-fechar:focus-visible { outline: 3px solid var(--azul-claro); outline-offset: 2px; }
+    .botao-azul { background: var(--azul); color: var(--branco); }
+    .botao-preto { background: var(--preto); color: var(--branco); }
+    .botao-contorno { background: var(--branco); color: var(--preto); border-color: var(--preto); }
+    .botao-branco { background: var(--branco); color: var(--preto); }
+
+
+    .cabecalho { position: sticky; top: 0; z-index: 10; background: rgba(255,255,255,.95); backdrop-filter: blur(8px); border-bottom: 1px solid var(--linha); }
+    .cabecalho .container { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 76px; }
+    .cabecalho img { height: 44px; width: auto; }
+    .menu { display: flex; align-items: center; gap: 28px; font-weight: 600; font-size: 15px; }
+    .menu a { text-decoration: none; }
+    .menu a:not(.botao):hover { color: var(--azul); }
+    .menu .botao { padding: 11px 18px; font-size: 15px; }
+
+
+    .hero { padding-block: 72px; }
+    .hero .container { display: grid; grid-template-columns: 1.1fr 1fr; gap: 48px; align-items: center; }
+    .hero-texto { display: flex; flex-direction: column; gap: 26px; }
+    .hero-eyebrow { display: flex; align-items: center; gap: 12px; }
+    .hero-eyebrow::before { content: ""; width: 40px; height: 3px; background: var(--azul); }
+    .hero h1 { font-family: var(--fonte-titulo); font-size: clamp(44px, 7vw, 76px); line-height: 1; }
+    .hero h1 span { color: var(--azul); }
+    .hero p { font-size: 20px; color: var(--texto); max-width: 520px; }
+    .botoes { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-logo { max-width: 440px; margin-inline: auto; }
+
+    .solucoes .container { display: flex; flex-direction: column; gap: 44px; }
+    .cabeca-secao { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
+    .cabeca-secao > div { display: flex; flex-direction: column; gap: 14px; max-width: 700px; }
+    .cabeca-secao p { color: var(--texto); font-size: 19px; }
+    .solucoes .titulo-secao { font-size: clamp(34px, 5vw, 52px); }
+    .cards-solucoes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+    .card-solucao { position: relative; text-align: left; font: inherit; border: 0; border-radius: 20px; padding: 36px; display: flex; flex-direction: column; gap: 22px; cursor: pointer; transition: transform .2s, box-shadow .2s; }
+    .card-solucao:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(11, 92, 255, .22); }
+    .card-solucao:focus-visible { outline: 3px solid var(--azul-claro); outline-offset: 3px; }
+    .card-solucao .etiqueta { align-self: flex-start; font-family: var(--fonte-detalhe); font-weight: 700; font-size: 13px; letter-spacing: .12em; padding: 7px 14px; border-radius: 99px; }
+    .card-solucao .frase { font-family: var(--fonte-titulo); font-size: clamp(24px, 2.6vw, 30px); line-height: 1.18; }
+    .card-solucao .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .card-solucao .chips span { font-weight: 700; font-size: 15px; padding: 8px 14px; border-radius: 99px; }
+    .card-solucao .ver { margin-top: auto; font-weight: 700; font-size: 16px; }
+    .card-solucao .ver::after { content: "  →"; transition: margin .2s; }
+    .card-solucao:hover .ver::after { margin-left: 6px; }
+
+    .card-sites { background: var(--azul); color: var(--branco); }
+    .card-sites .etiqueta { background: var(--branco); color: var(--azul); }
+    .card-sites .chips span { background: rgba(255,255,255,.18); color: var(--branco); }
+    .card-sistemas { background: var(--preto); color: var(--branco); }
+    .card-sistemas .etiqueta { background: var(--azul); color: var(--branco); }
+    .card-sistemas .chips span { background: var(--grafite); color: var(--branco); }
+    .card-apps { background: #D9E6FF; color: var(--preto); }
+    .card-apps .etiqueta { background: var(--preto); color: var(--branco); }
+    .card-apps .chips span { background: var(--branco); color: var(--azul); }
+    .card-mais { background: linear-gradient(135deg, var(--azul) 0%, var(--preto) 100%); color: var(--branco); }
+    .card-mais .etiqueta { background: var(--branco); color: var(--preto); }
+    .card-mais .chips span { background: rgba(255,255,255,.16); color: var(--branco); }
+
+    .chamada { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; background: var(--fundo-claro); border-radius: 16px; padding: 24px 32px; }
+    .chamada p { font-weight: 700; font-size: 19px; }
+
+    .educacao { background: var(--preto); color: var(--branco); }
+    .educacao .container { display: flex; flex-direction: column; gap: 48px; }
+    .educacao-topo { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end; }
+    .educacao-topo > div { display: flex; flex-direction: column; gap: 14px; }
+    .educacao .eyebrow { color: var(--azul-claro); }
+    .educacao-topo p { color: var(--texto-claro); font-size: 18px; }
+    .educacao-topo .nota-multiplicador { color: var(--azul-claro); font-size: 15px; font-weight: 700; }
+    .cards-formacoes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+    .formacao { background: #171C24; border: 1px solid var(--grafite); border-radius: 16px; padding: 28px 28px 32px; display: flex; flex-direction: column; gap: 14px; transition: border-color .2s, transform .2s; }
+    .formacao:hover { border-color: var(--azul); transform: translateY(-4px); }
+    .formacao .sigla { align-self: flex-start; font-family: var(--fonte-detalhe); font-weight: 700; font-size: 14px; letter-spacing: .08em; background: var(--azul); color: var(--branco); padding: 6px 12px; border-radius: 8px; }
+    .formacao h3 { font-family: var(--fonte-texto); font-weight: 700; font-size: 22px; }
+    .formacao p { color: var(--texto-claro); }
+    .formacao-chamada { background: var(--azul); border-color: var(--azul); }
+    .formacao-chamada h3 { font-family: var(--fonte-titulo); font-weight: 400; font-size: 26px; line-height: 1.15; }
+    .formacao-chamada p { color: #E3EBFF; }
+    .formacao-chamada .botao { align-self: flex-start; margin-top: auto; color: var(--azul); }
+
+   
+    .projetos .container { display: flex; flex-direction: column; gap: 40px; }
+    .projetos .cabeca-secao > div { gap: 12px; }
+    .lista-projetos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+    .projeto { display: flex; flex-direction: column; gap: 14px; }
+    .projeto-foto { aspect-ratio: 5 / 4; border-radius: 8px; background: var(--azul-suave); border: 1.5px dashed #9DB8F5; display: grid; place-items: center; color: #4A6FC4; font-weight: 600; font-size: 15px; overflow: hidden; }
+    .projeto-foto img { width: 100%; height: 100%; object-fit: cover; }
+    .projeto h3 { font-family: var(--fonte-texto); font-weight: 700; font-size: 22px; }
+    .projeto p { color: var(--texto); }
+
+    .equipe { background: linear-gradient(to top, var(--preto) 0%, rgba(0, 0, 0, .77) 10%, rgba(42, 48, 58, 0) 70%), var(--grafite); color: var(--branco); padding-bottom: 0; }
+    .equipe .container { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; }
+    .equipe-foto { align-self: end; }
+    .equipe-texto { display: flex; flex-direction: column; gap: 22px; padding-bottom: 88px; align-self: center; }
+    .equipe .eyebrow { color: var(--azul-claro); font-size: 20px; }
+    .equipe-texto p { color: #E3E7EE; font-size: 17px; }
+    .nomes { display: flex; gap: 12px; flex-wrap: wrap; }
+    .nome-membro { font-family: var(--fonte-detalhe); font-weight: 700; font-size: 18px; color: var(--branco); background: transparent; border: 1.5px solid var(--branco); border-radius: 6px; padding: 10px 18px; cursor: pointer; transition: background .15s, color .15s; }
+    .nome-membro:hover, .nome-membro[aria-expanded="true"] { background: var(--branco); color: var(--preto); }
+    .dica { font-size: 14px; color: #C9D2E3; }
+    .areas { display: flex; gap: 10px; flex-wrap: wrap; }
+    .areas span { background: var(--azul-suave); color: var(--azul); font-weight: 600; font-size: 14px; padding: 6px 12px; border-radius: 99px; }
+
+
+    .popup-fundo { position: fixed; inset: 0; background: rgba(14,17,22,.55); display: grid; place-items: center; padding: 16px; z-index: 50; opacity: 0; pointer-events: none; transition: opacity .2s; }
+    .popup-fundo.aberto { opacity: 1; pointer-events: auto; }
+    .popup { width: min(400px, 100%); background: var(--preto); color: var(--branco); border: 1.5px solid var(--azul); border-radius: 12px; padding: 26px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 16px 40px rgba(0,0,0,.35); transform: translateY(12px); transition: transform .2s; }
+    .popup-fundo.aberto .popup { transform: translateY(0); }
+    .popup-topo { display: flex; justify-content: space-between; align-items: center; }
+    .popup h3 { font-family: var(--fonte-detalhe); font-weight: 700; font-size: 26px; }
+    .popup-fechar { background: none; border: 0; color: #A9B0BC; font-size: 22px; cursor: pointer; width: 44px; height: 44px; border-radius: 6px; }
+    .popup-funcao { color: var(--azul-claro); font-weight: 700; }
+    .popup ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; color: #E3E7EE; }
+    .popup-nota { font-size: 14px; color: #A9B0BC; }
+    .popup #popup-botao { align-self: flex-start; }
+    .popup-tag { align-self: flex-start; background: #1B2A4A; color: #8FB1FF; font-weight: 700; font-size: 13px; padding: 6px 12px; border-radius: 99px; }
+
+    .contato { background: linear-gradient(to top, var(--preto) 0%, rgba(14, 17, 22, 0) 82%), var(--azul); color: var(--branco); padding-block: 96px; }
+    .contato .container { display: flex; flex-direction: column; gap: 22px; align-items: flex-start; }
+    .contato .eyebrow { color: #D6E2FF; }
+    .contato h2 { font-family: var(--fonte-texto); font-weight: 700; font-size: clamp(36px, 6vw, 60px); line-height: 1.05; max-width: 820px; }
+    .contato p { font-size: 20px; color: #E3EBFF; max-width: 560px; }
+    .contato-linha { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-weight: 600; }
+    .botao-whats { background: var(--branco); color: var(--azul); }
+
+    /* ====== RODAPÉ ====== */
+    .rodape { background: var(--preto); color: #A9B0BC; font-size: 14px; }
+    .rodape .container { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; padding-block: 28px; }
+    .rodape strong { font-family: var(--fonte-detalhe); color: var(--branco); letter-spacing: .08em; }
+
+   
+    @media (max-width: 960px) {
+      .cards-formacoes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .educacao-topo { grid-template-columns: 1fr; gap: 20px; }
+      .hero .container, .equipe .container { grid-template-columns: 1fr; }
+      .hero-logo { max-width: 300px; order: -1; }
+      .equipe-texto { padding-bottom: 0; }
+      .equipe-foto { order: 2; }
+    }
+    @media (max-width: 720px) {
+      .menu a:not(.botao) { display: none; }
+      section { padding-block: 64px; }
+      .cards-solucoes, .cards-formacoes, .lista-projetos { grid-template-columns: 1fr; }
+      .card-solucao { padding: 28px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="cabecalho">
+    <div class="container">
+      <a href="#inicio" aria-label="Delta Dev, voltar ao início"><img src="assets/logo.png" alt="Delta Dev"></a>
+      <nav class="menu" aria-label="Menu principal">
+        <a href="#solucoes">Soluções digitais</a>
+        <a href="#educacao">Educação</a>
+        <a href="#projetos">Nossos projetos</a>
+        <a href="#equipe">Quem somos</a>
+        <a class="botao botao-azul" href="#contato">Pedir orçamento</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-texto">
+          <span class="eyebrow hero-eyebrow">Startup de tecnologia · Tucuruí, PA</span>
+          <h1>Ideias que viram <span>soluções.</span></h1>
+          <p>Somos uma startup movida por pessoas e tecnologia. Transformamos ideias em projetos, e projetos em realidade.</p>
+          <div class="botoes">
+            <a class="botao botao-preto" href="#solucoes">Soluções digitais</a>
+            <a class="botao botao-contorno" href="#educacao">Educação</a>
+          </div>
+        </div>
+        <img class="hero-logo" src="assets/logo.png" alt="Logo da Delta Dev">
+      </div>
+    </section>
+
+  
+    <section class="solucoes" id="solucoes">
+      <div class="container">
+        <div class="cabeca-secao">
+          <div>
+            <span class="eyebrow">Soluções digitais</span>
+            <h2 class="titulo-secao">Do que o seu negócio precisa?</h2>
+            <p>Não precisa saber o nome técnico. Escolha a situação que mais parece com a sua e clique pra ver exemplos. A gente cuida do resto.</p>
+          </div>
+        </div>
+
+        <div class="cards-solucoes">
+          <button class="card-solucao card-sites" data-solucao="sites" aria-haspopup="dialog">
+            <span class="etiqueta">SITES</span>
+            <span class="frase">“Quero que as pessoas encontrem meu negócio na internet.”</span>
+            <span class="chips"><span>Cardápio online</span><span>Site da empresa</span><span>Portfólio</span><span>Página de inscrição</span></span>
+            <span class="ver">Ver exemplos</span>
+          </button>
+          <button class="card-solucao card-sistemas" data-solucao="sistemas" aria-haspopup="dialog">
+            <span class="etiqueta">SISTEMAS</span>
+            <span class="frase">“Anoto tudo no caderno e vivo me perdendo.”</span>
+            <span class="chips"><span>Controle de estoque</span><span>Pedidos e vendas</span><span>Agenda de clientes</span><span>Controle financeiro</span></span>
+            <span class="ver">Ver exemplos</span>
+          </button>
+          <button class="card-solucao card-apps" data-solucao="apps" aria-haspopup="dialog">
+            <span class="etiqueta">APLICATIVOS</span>
+            <span class="frase">“Quero que meus clientes resolvam tudo pelo celular.”</span>
+            <span class="chips"><span>Agendamento</span><span>Pedidos e delivery</span><span>Cartão fidelidade</span><span>Área do aluno</span></span>
+            <span class="ver">Ver exemplos</span>
+          </button>
+          <button class="card-solucao card-mais" data-solucao="mais" aria-haspopup="dialog">
+            <span class="etiqueta">JOGOS E MAIS</span>
+            <span class="frase">“Tenho uma ideia diferente e não sei por onde começar.”</span>
+            <span class="chips"><span>Jogos educativos</span><span>Quiz interativo</span><span>Automações</span><span>A sua ideia</span></span>
+            <span class="ver">Ver exemplos</span>
+          </button>
+        </div>
+
+        <div class="chamada">
+          <p>Não achou a sua situação? Conta pra gente, que a gente pensa junto com você.</p>
+          <a class="botao botao-azul" href="https://wa.me/5594SEUNUMERO?text=Ol%C3%A1%2C%20Delta%20Dev!%20Quero%20um%20or%C3%A7amento%20para%20um%20projeto." target="_blank" rel="noopener">Pedir orçamento no WhatsApp</a>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="educacao" id="educacao">
+      <div class="container">
+        <div class="educacao-topo">
+          <div>
+            <span class="eyebrow">Educação</span>
+            <h2 class="titulo-secao">Formações de tecnologia para educadores.</h2>
+          </div>
+          <div>
+            <p>Preparamos gestores e coordenadores pedagógicos para levar a tecnologia aos seus professores, com base na BNCC Computação e nas orientações do MEC. Formações e palestras conduzidas pelos três, em equipe.</p>
+            <p class="nota-multiplicador">Formato multiplicador: o coordenador sai pronto pra replicar com os professores, com material de apoio.</p>
+          </div>
+        </div>
+
+        <div class="cards-formacoes">
+          <article class="formacao"><span class="sigla">BNCC</span><h3>Computação na BNCC</h3><p>Os três eixos (pensamento computacional, mundo digital e cultura digital) e como levar ao currículo da rede. Obrigatório desde 2026.</p></article>
+          <article class="formacao"><span class="sigla">IA</span><h3>IA na sala de aula</h3><p>Uso responsável da inteligência artificial no planejamento e nas aulas, seguindo o referencial do MEC.</p></article>
+          <article class="formacao"><span class="sigla">LD</span><h3>Letramento digital</h3><p>Educação midiática, checagem de informações e cidadania digital, como prevê a Política Nacional de Educação Digital.</p></article>
+          <article class="formacao"><span class="sigla">DES</span><h3>Computação desplugada</h3><p>Pensamento computacional sem computador e sem internet, pra qualquer realidade de escola.</p></article>
+          <article class="formacao"><span class="sigla">CEL</span><h3>Celular com propósito</h3><p>Como usar o celular de forma pedagógica dentro das regras da Lei 15.100/2025.</p></article>
+          <article class="formacao formacao-chamada">
+            <h3>Monte a formação da sua rede</h3>
+            <p>Combinamos os temas, a carga horária e o formato com a sua secretaria ou escola.</p>
+            <a class="botao botao-branco" href="https://wa.me/5594SEUNUMERO?text=Ol%C3%A1%2C%20Delta%20Dev!%20Quero%20saber%20sobre%20as%20forma%C3%A7%C3%B5es%20para%20educadores." target="_blank" rel="noopener">Falar sobre formações</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  
+    <section class="projetos" id="projetos">
+      <div class="container">
+        <div class="cabeca-secao">
+          <div>
+            <span class="eyebrow">Nossos projetos</span>
+            <h2 class="titulo-secao">Soluções que já saíram do papel.</h2>
+          </div>
+        </div>
+        <div class="lista-projetos">
+         
+          <article class="projeto"><div class="projeto-foto">[FOTO DO PROJETO 1]</div><h3>[Nome do projeto 1]</h3><p>[Cliente] precisava de [problema]. Criamos [solução].</p></article>
+          <article class="projeto"><div class="projeto-foto">[FOTO DO PROJETO 2]</div><h3>[Nome do projeto 2]</h3><p>[Cliente] precisava de [problema]. Criamos [solução].</p></article>
+          <article class="projeto"><div class="projeto-foto">[FOTO DO PROJETO 3]</div><h3>[Nome do projeto 3]</h3><p>[Cliente] precisava de [problema]. Criamos [solução].</p></article>
+        </div>
+      </div>
+    </section>
+
+    
+    <section class="equipe" id="equipe">
+      <div class="container">
+        <img class="equipe-foto" src="assets/equipe.png" alt="Lucas, Vitória e Kleber Jr., equipe da Delta Dev">
+        <div class="equipe-texto">
+          <span class="eyebrow">Quem somos</span>
+          <h2 class="titulo-secao">Tecnologia feita por gente daqui.</h2>
+          <p>A Delta Dev nasceu em Tucuruí, no Pará, da vontade de três amigos de usar a tecnologia pra resolver problemas reais da nossa região.</p>
+          <p>Somos uma equipe versátil. A cada projeto, nos revezamos entre front-end, back-end e UX, conforme o que a sua ideia pede.</p>
+          <div class="nomes">
+            <button class="nome-membro" data-membro="lucas" aria-haspopup="dialog" aria-expanded="false">Lucas</button>
+            <button class="nome-membro" data-membro="vitoria" aria-haspopup="dialog" aria-expanded="false">Vitória</button>
+            <button class="nome-membro" data-membro="kleber" aria-haspopup="dialog" aria-expanded="false">Kleber Jr.</button>
+          </div>
+          <span class="dica">Clique em um nome pra conhecer cada um.</span>
+          <div class="areas"><span>Front-end</span><span>Back-end</span><span>UX</span><span>Formações</span></div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="contato" id="contato">
+      <div class="container">
+        <span class="eyebrow">Contato</span>
+        <h2>Vamos tirar sua ideia do papel?</h2>
+        <p>Chama a gente no WhatsApp e peça seu orçamento. A gente responde rapidinho.</p>
+        <div class="contato-linha">
+          <a class="botao botao-whats" href="https://wa.me/5594SEUNUMERO?text=Ol%C3%A1%2C%20Delta%20Dev!%20Quero%20um%20or%C3%A7amento%20para%20um%20projeto." target="_blank" rel="noopener">Falar no WhatsApp</a>
+          <span>(94) [SEU NÚMERO] · @[instagram]</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <strong>DELTA DEV</strong>
+      <span>Ideias que viram soluções · Tucuruí, Pará</span>
+    </div>
+  </footer>
+
+  
+  <div class="popup-fundo" id="popup-fundo" aria-hidden="true">
+    <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popup-nome">
+      <div class="popup-topo">
+        <h3 id="popup-nome"></h3>
+        <button class="popup-fechar" id="popup-fechar" aria-label="Fechar">✕</button>
+      </div>
+      <span class="popup-funcao" id="popup-funcao"></span>
+      <ul id="popup-lista"></ul>
+      <span class="popup-tag" id="popup-tag">Formações e palestras em equipe</span>
+      <p class="popup-nota" id="popup-nota" hidden>Quanto custa? Depende do tamanho do projeto. Chama no WhatsApp que a gente faz um orçamento sem compromisso.</p>
+      <a class="botao botao-azul" id="popup-botao" hidden href="https://wa.me/5594SEUNUMERO?text=Ol%C3%A1%2C%20Delta%20Dev!%20Quero%20um%20or%C3%A7amento%20para%20um%20projeto." target="_blank" rel="noopener">Pedir orçamento</a>
+    </div>
+  </div>
+
+  <script>
+    
+    const equipe = {
+      lucas: {
+        nome: "Lucas",
+        funcao: "Back-end e dados",
+        itens: ["Back-end e banco de dados (SQL)", "Linguagens de programação", "Atuante no Fab Lab"]
+      },
+      vitoria: {
+        nome: "Vitória",
+        funcao: "Engenharia de software e gestão",
+        itens: ["Mestranda em Computação Aplicada (PPCA/UFPA)", "Bacharel em Sistemas de Informação", "Engenharia de software", "Gestão de projetos e Scrum Master", "Apoio em UX e design"]
+      },
+      kleber: {
+        nome: "Kleber Jr.",
+        funcao: "Front-end e UX",
+        itens: ["Front-end e construção de telas", "UX e design de interfaces"]
+      }
+    };
+    const solucoes = {
+      sites: { nome: "Sites", funcao: "Exemplos de quem usa:", itens: ["Restaurante com cardápio online e botão de pedido no WhatsApp", "Salão de beleza mostrando fotos dos trabalhos", "Evento com página de inscrição", "Profissional liberal com portfólio"] },
+      sistemas: { nome: "Sistemas", funcao: "Exemplos de quem usa:", itens: ["Loja de roupas controlando o estoque", "Confeitaria organizando as encomendas", "Escola controlando matrículas", "Oficina com histórico de cada cliente"] },
+      apps: { nome: "Aplicativos", funcao: "Exemplos de quem usa:", itens: ["Clínica com agendamento de consultas", "Lanchonete recebendo pedidos pelo app", "Academia com treinos no celular", "Loja com cartão fidelidade digital"] },
+      mais: { nome: "Jogos e mais", funcao: "Exemplos de quem usa:", itens: ["Jogo educativo para a escola", "Quiz interativo para evento ou campanha", "Automação de tarefas repetitivas", "Protótipo pra testar a sua ideia"] }
+    };
+
+    const fundo = document.getElementById("popup-fundo");
+    const fechar = document.getElementById("popup-fechar");
+    let botaoAtual = null;
+
+    function abrir(botao, pessoa, tipo) {
+      document.getElementById("popup-nome").textContent = pessoa.nome;
+      document.getElementById("popup-funcao").textContent = pessoa.funcao;
+      const lista = document.getElementById("popup-lista");
+      lista.innerHTML = "";
+      pessoa.itens.forEach(item => {
+        const li = document.createElement("li");
+        li.textContent = item;
+        lista.appendChild(li);
+      });
+      const ehEquipe = tipo === "equipe";
+      document.getElementById("popup-tag").hidden = !ehEquipe;
+      document.getElementById("popup-nota").hidden = ehEquipe;
+      document.getElementById("popup-botao").hidden = ehEquipe;
+      botaoAtual = botao;
+      botao.setAttribute("aria-expanded", "true");
+      fundo.classList.add("aberto");
+      fundo.setAttribute("aria-hidden", "false");
+      fechar.focus();
+    }
+
+    function fecharPopup() {
+      fundo.classList.remove("aberto");
+      fundo.setAttribute("aria-hidden", "true");
+      if (botaoAtual) { botaoAtual.setAttribute("aria-expanded", "false"); botaoAtual.focus(); }
+    }
+
+    document.querySelectorAll(".nome-membro").forEach(b => b.addEventListener("click", () => abrir(b, equipe[b.dataset.membro], "equipe")));
+    document.querySelectorAll(".card-solucao").forEach(b => b.addEventListener("click", () => abrir(b, solucoes[b.dataset.solucao], "solucao")));
+    fechar.addEventListener("click", fecharPopup);
+    fundo.addEventListener("click", e => { if (e.target === fundo) fecharPopup(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape" && fundo.classList.contains("aberto")) fecharPopup(); });
+  </script>
+</body>
+</html>
